@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}主页{% endblock %}
+{% block content %}
+   {% if message %}
+       <div class="alert alert-warning">{{ message }}</div>
+       {% else %}
+       <br>
+   {% endif %}
+    <script type="text/javascript">
+        function course_cre() {
+            var c=document.getElementsByName("new1");
+            var b=c[0].value;
+
+            window.location.href='/index/?new='+b+'&max_count='+c[1].value;
+        }
+    </script>
+
+
+    <table border="1">
+    <tr>
+    <th>My course</th>
+        <th>Left_num</th>
+        <th>Max_num</th>
+    <th>Detial</th>
+        <th>Manage</th>
+    </tr>
+    {% for item in course %}
+    <tr>
+
+        <th>{{ item }}</th>
+        <th>{{ item.left_count }}</th>
+        <th>{{ item.max_count }}</th>
+        <th><a href="/inf/?course={{ item }}">详细信息</a></th>
+        <th><a href="/index/?course={{ item }}&del_cou=1">删除课程</a></th>
+    </tr>
+   {% endfor %}
+    <tr>
+         <th><input type="text" name="new1" id="new_c" required="required"  ></th>
+        <th></th>
+        <th><input type="number" name="new1" id="new_c" required="required"  ></th>
+    <th><a  onclick="course_cre()">创建课程</a></th>
+    </tr>
+    </table>
+
+
+{% endblock %}
+

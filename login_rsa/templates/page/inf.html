@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}主页{% endblock %}
+{% block content %}
+
+       <div class="alert alert-warning">当前课程:{{ course }}</div>
+    <script type="text/javascript">
+        function fix_score(stu) {
+            var c=document.getElementsByName("score");
+            var b=c[0].value;
+
+            window.location.href='/inf/?stu='+stu+'&course={{ course }}&score='+b;
+        }
+    </script>
+
+    <table border="1">
+    <tr>
+        <th>Stu</th>
+        <th>Score</th>
+        <th>Manage</th>
+        <th>Delete</th>
+    </tr>
+    {% for item in choice %}
+    <tr>
+    <th>{{ item.stu }}</th>
+        <th><input name="score" value="{{ item.score }}"></th>
+        <th><a onclick="fix_score('{{ item.stu }}')">修改</a></th>
+    <th><a href="/inf/?course={{ course }}&stu={{ item.stu }}&delete=1">删除</a></th>
+    </tr>
+   {% endfor %}
+
+    </table>
+
+
+
+
+
+{% endblock %}
+

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}主页{% endblock %}
+{% block content %}
+   {% if message %}
+       <div class="alert alert-warning">hello,{{ name }}</div>
+   {% endif %}
+    <p>课程记录</p>
+    <table border="1">
+    <tr>
+        <th>Course</th>
+        <th>Teacher</th>
+        <th>Left</th>
+        <th>Max</th>
+        <th>option</th>
+        <th>Score</th>
+    </tr>
+    {% for item,flag,score in course %}
+    <tr>
+    <th>{{ item.c_name }}</th>
+        <th>{{ item.c_teacher }}</th>
+        <th>{{ item.left_count }}</th>
+        <th>{{ item.max_count }}</th>
+        {% if flag %}
+        <th><a href="/index/?course={{ item.c_name }}&teacher={{ item.c_teacher }}">选课</a></th>
+            <th></th>
+    {% else %}
+            <th>已选</th>
+            <th>{{ score }}</th>
+    {% endif %}
+    </tr>
+   {% endfor %}
+
+    </table>
+
+    <p>历史记录</p>
+<table border="1">
+    <tr>
+        <th>Course</th>
+        <th>Teacher</th>
+        <th>time</th>
+    </tr>
+    {% for detial,my_select  in info %}
+    <tr>
+        <th>{{ my_select.c_name }}</th>
+        <th>{{ my_select.c_teacher}}</th>
+        <th>{{ detial.time }}</th>
+
+    </tr>
+   {% endfor %}
+
+    </table>
+
+
+
+
+{% endblock %}
+
